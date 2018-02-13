@@ -25,9 +25,9 @@ app.use((req, res, next) => {
 });
 
 // Middleware maintenance
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   res.render('maintenance.hbs');
-});
+});*/
 
 // Middleware HTML render capabilities
 app.use(express.static(__dirname + '/public'));
@@ -47,7 +47,8 @@ app.get('/', (req, res) => {
     pageTitle: 'Home page',
     welcomeMessage: 'Welcome!',
     link: '/about',
-    linkText: 'about'
+    linkText: 'about',
+    showProjects: 'block'
   });
 });
 
@@ -55,7 +56,17 @@ app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'Need help?',
     link: '/',
-    linkText: 'home'
+    linkText: 'home',
+    showProjects: 'block'
+  });
+});
+
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects',
+    link: '/',
+    linkText: 'home',
+    showProjects: 'none'
   });
 });
 
