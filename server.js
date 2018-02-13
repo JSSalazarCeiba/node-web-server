@@ -3,12 +3,15 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
+// Port constant
+const port = process.env.PORT || 3000;
+
 // Make a new express app
 var app = express();
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
 
-// Log middleware
+// Middleware log
 app.use((req, res, next) => {
   var now = new Date().toString();
   var log = `${now} ${req.method} ${req.url}`;
@@ -21,12 +24,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// Maintenance middleware
+// Middleware maintenance
 app.use((req, res, next) => {
   res.render('maintenance.hbs');
 });
 
-// HTML load middleware
+// Middleware HTML render capabilities
 app.use(express.static(__dirname + '/public'));
 
 // Helpers
@@ -60,6 +63,6 @@ app.get('/bad', (req, res) => {
 });
 
 // Setup a listener
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('Server is up on port 3000');
 });
